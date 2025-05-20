@@ -1,14 +1,11 @@
 package com.example.aula.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table (name = "tab_jogadores")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,53 +14,49 @@ public class Usuario {
     @NotBlank(message = "Nome é obrigatório.")
     private String nome;
 
-    @NotBlank(message = "E-mail é obrigatório.")
-    @Email(message = "Deve ser um e-mail válido.")
-    private String email;
+    @NotBlank(message = "Sexo é obrigatório.")
+    private String sexo;
 
-    @NotBlank(message = "Senha é obrigatória.")
-    @Size(min = 3, message = "A senha deve ter no mínimo 3 caracteres.")
-    private String senha;
+    @NotNull(message = "Idade é obrigatória.")
+    private Integer idade;
 
-    public Usuario() {
-    }
+    @NotNull(message = "Altura é obrigatória.")
+    private Double altura;
 
-    public Usuario(Long id, String nome, String email, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
+    @NotNull(message = "Peso é obrigatório.")
+    private Double peso;
 
-    public Long getId() {
-        return id;
-    }
+    @NotBlank(message = "Posição é obrigatória.")
+    private String posicao;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @NotNull(message = "Número da camisa é obrigatório.")
+    private Integer numeroCamisa;
 
-    public @NotBlank(message = "Nome é obrigatório.") String getNome() {
-        return nome;
-    }
+    public Usuario() {}
 
-    public void setNome(@NotBlank(message = "Nome é obrigatório.") String nome) {
-        this.nome = nome;
-    }
+    // Getters e setters para todos os campos
 
-    public @NotBlank(message = "E-mail é obrigatório.") @Email String getEmail() {
-        return email;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setEmail(@NotBlank(message = "E-mail é obrigatório.") @Email String email) {
-        this.email = email;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public @NotBlank(message = "Senha é obrigatória.") @Size(min = 3, message = "A senha deve ter no mínimo 3 caracteres.") String getSenha() {
-        return senha;
-    }
+    public String getSexo() { return sexo; }
+    public void setSexo(String sexo) { this.sexo = sexo; }
 
-    public void setSenha(@NotBlank(message = "Senha é obrigatória.") @Size(min = 3, message = "A senha deve ter no mínimo 3 caracteres.") String senha) {
-        this.senha = senha;
-    }
+    public Integer getIdade() { return idade; }
+    public void setIdade(Integer idade) { this.idade = idade; }
+
+    public Double getAltura() { return altura; }
+    public void setAltura(Double altura) { this.altura = altura; }
+
+    public Double getPeso() { return peso; }
+    public void setPeso(Double peso) { this.peso = peso; }
+
+    public String getPosicao() { return posicao; }
+    public void setPosicao(String posicao) { this.posicao = posicao; }
+
+    public Integer getNumeroCamisa() { return numeroCamisa; }
+    public void setNumeroCamisa(Integer numeroCamisa) { this.numeroCamisa = numeroCamisa; }
 }

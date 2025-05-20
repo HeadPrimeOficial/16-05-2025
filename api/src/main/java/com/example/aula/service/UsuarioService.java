@@ -1,6 +1,5 @@
 package com.example.aula.service;
 
-import com.example.aula.exception.EmailJaCadastradoException;
 import com.example.aula.model.Usuario;
 import com.example.aula.repository.UsuarioRepository;
 import jakarta.validation.Valid;
@@ -23,29 +22,29 @@ public class UsuarioService {
     }
 
     public Usuario salvar(@Valid Usuario usuario) {
-        if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
-            throw new EmailJaCadastradoException("Usuário já cadastrado.");
-        }
-
+        // Aqui você pode adicionar validações extras se necessário
         return usuarioRepository.save(usuario);
     }
 
     public Usuario atualizar(@Valid Usuario usuario) {
         Usuario usuarioAtualizar = usuarioRepository.findById(usuario.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado."));
+                .orElseThrow(() -> new IllegalArgumentException("Jogador não encontrado."));
 
         usuarioAtualizar.setNome(usuario.getNome());
-        usuarioAtualizar.setEmail(usuario.getEmail());
-        usuarioAtualizar.setSenha(usuario.getSenha());
+        usuarioAtualizar.setSexo(usuario.getSexo());
+        usuarioAtualizar.setIdade(usuario.getIdade());
+        usuarioAtualizar.setAltura(usuario.getAltura());
+        usuarioAtualizar.setPeso(usuario.getPeso());
+        usuarioAtualizar.setPosicao(usuario.getPosicao());
+        usuarioAtualizar.setNumeroCamisa(usuario.getNumeroCamisa());
 
         return usuarioRepository.save(usuarioAtualizar);
     }
 
     public void excluir(Long id) {
         Usuario usuarioExcluir = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
 
         usuarioRepository.deleteById(usuarioExcluir.getId());
     }
-
 }
